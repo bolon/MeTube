@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by lenovo on 4/6/2016.
  */
-public class ModelSnippet implements Serializable{
+public class ModelSnippetVideo implements Serializable{
     String publishedAt;
     String channelId;
     String title;
@@ -56,6 +56,7 @@ public class ModelSnippet implements Serializable{
 
     //youtube thumb return object , must deserialized 1st
     //have 4 type of size, instead taking all we only retrive standard size, proceed using Picasso lib
+    //only take "standart" size because after analyze the data retrieved. sometimes video doesnt have "default" value.
     public class ImgThumb implements Serializable{
         @SerializedName("high") //tell gson to retrieve high value for thumb
         ImgThumbType standard;

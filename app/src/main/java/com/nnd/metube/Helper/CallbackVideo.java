@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by lenovo on 4/6/2016.
  */
-public class CallbackAPI {
+public class CallbackVideo {
     String kind;
     List<ModelVideo> items;
     String nextPageToken;

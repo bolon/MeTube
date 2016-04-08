@@ -9,13 +9,13 @@ public class ModelVideo  implements Serializable {
     private String kind;
     private String id;
     private String etag;
-    private ModelSnippet snippet;
+    private ModelSnippetVideo snippet;
 
-    public ModelSnippet getSnippet() {
+    public ModelSnippetVideo getSnippet() {
         return snippet;
     }
 
-    public void setSnippet(ModelSnippet snippet) {
+    public void setSnippet(ModelSnippetVideo snippet) {
         this.snippet = snippet;
     }
 
@@ -43,3 +43,4 @@ public class ModelVideo  implements Serializable {
         this.etag = etag;
     }
 }
+

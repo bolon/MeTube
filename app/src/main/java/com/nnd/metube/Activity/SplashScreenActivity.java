@@ -6,8 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.nnd.metube.Adapter.CustomGridAdapter;
-import com.nnd.metube.Helper.CallbackAPI;
+import com.nnd.metube.Helper.CallbackVideo;
 import com.nnd.metube.Helper.RESTClient;
 import com.nnd.metube.Model.ModelVideo;
 import com.nnd.metube.R;
@@ -35,10 +34,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
-        Call<CallbackAPI> call = RESTClient.getRestClient().getVideoList("snippet", "mostPopular", 12, RESTClient.API_KEY); //12 -> itm retrieved per request
-        call.enqueue(new Callback<CallbackAPI>() {
+        Call<CallbackVideo> call = RESTClient.getRestClient().getVideoList("snippet", "mostPopular", 12, RESTClient.API_KEY); //12 -> itm retrieved per request
+        call.enqueue(new Callback<CallbackVideo>() {
             @Override
-            public void onResponse(Call<CallbackAPI> call, Response<CallbackAPI> response) {
+            public void onResponse(Call<CallbackVideo> call, Response<CallbackVideo> response) {
                 progressDialog.dismiss();
                 list_vid = response.body().getItems();
                 Log.d("ITEM 1", String.valueOf(list_vid.get(0).getSnippet().getThumbnails().getStandard().getUrl()));
@@ -51,7 +50,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CallbackAPI> call, Throwable t) {
+            public void onFailure(Call<CallbackVideo> call, Throwable t) {
                 progressDialog.dismiss();
                 Log.d("FAIL", t.getMessage());
             }

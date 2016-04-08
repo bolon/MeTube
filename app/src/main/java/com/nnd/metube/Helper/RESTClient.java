@@ -31,7 +31,6 @@ public class RESTClient {
     }
 
     //setup resclient
-    //using OkHttpClient we can customize access method of restclient
     private static void setRestClient(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
