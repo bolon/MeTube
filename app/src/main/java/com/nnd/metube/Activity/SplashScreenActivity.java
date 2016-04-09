@@ -34,16 +34,17 @@ public class SplashScreenActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
-        Call<CallbackVideo> call = RESTClient.getRestClient().getVideoList("snippet", "mostPopular", 12, RESTClient.API_KEY); //12 -> itm retrieved per request
+        Call<CallbackVideo> call = RESTClient.getRestClient().getVideoList("snippet", "mostPopular", 12, null, RESTClient.API_KEY); //12 -> itm retrieved per request
         call.enqueue(new Callback<CallbackVideo>() {
             @Override
             public void onResponse(Call<CallbackVideo> call, Response<CallbackVideo> response) {
                 progressDialog.dismiss();
                 list_vid = response.body().getItems();
+                CallbackVideo m_callbackVideo = response.body();
                 Log.d("ITEM 1", String.valueOf(list_vid.get(0).getSnippet().getThumbnails().getStandard().getUrl()));
 
                 Intent mIntent = new Intent(getApplicationContext(), MainActivity.class);
-                mIntent.putExtra("list_video", (Serializable) list_vid);
+                mIntent.putExtra("callback_video", (Serializable) m_callbackVideo);
 
                 startActivity(mIntent);
                 finish();

@@ -105,4 +105,5 @@ public class CustomVideoAdapter extends BaseAdapter {
         ImageView thumb;
         TextView title;
     }
+
 }
