@@ -1,7 +1,9 @@
 package com.nnd.metube.Activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,7 +56,41 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void onFailure(Call<CallbackVideo> call, Throwable t) {
                 progressDialog.dismiss();
                 Log.d("FAIL", t.getMessage());
+                if (t.getMessage().contains("Unable to resolve host")) {
+                    //SplashScreenActivity.this.recreate();
+                    buildAlertDialogRefresh();
+                }
             }
         });
+    }
+
+    void buildAlertDialogRefresh(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(SplashScreenActivity.this);
+        builder.setMessage(
+                "You are not connected to the internet. Do you want to refresh the app?")
+                .setCancelable(true)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                // TODO Auto-generated method stub
+                                SplashScreenActivity.this.recreate();
+                                dialog.dismiss();
+                            }
+                        })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        SplashScreenActivity.this.finish();
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
